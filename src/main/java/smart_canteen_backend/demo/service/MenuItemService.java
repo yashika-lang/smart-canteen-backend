@@ -4,6 +4,7 @@ import smart_canteen_backend.demo.dto.AddMenuRequestDto;
 import smart_canteen_backend.demo.dto.MenuDto;
 
 import java.util.List;
+import java.util.Map;
 
 public interface MenuItemService {
 
@@ -13,4 +14,8 @@ public interface MenuItemService {
 
 
     void deleteMenuItemById(Long id);
+
+    MenuDto updateMenuById(Long id, AddMenuRequestDto addMenuRequestDto);
+
+    MenuDto updatePartialMenuItem(Long id, Map<String, Object> updates);
 }
