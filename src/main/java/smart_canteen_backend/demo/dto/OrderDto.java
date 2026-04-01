@@ -12,7 +12,7 @@ public class OrderDto {
 
     private Long id;
     private Long menuItemId;
-
+    private Long userId;
     private Integer quantity;
     private Integer totalPrice;
     private String status;

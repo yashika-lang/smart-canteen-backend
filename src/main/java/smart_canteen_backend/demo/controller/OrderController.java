@@ -11,37 +11,36 @@ import smart_canteen_backend.demo.service.OrderService;
 
 import java.util.List;
 import java.util.Map;
-
-@RequiredArgsConstructor
-@RequestMapping("/order")
 @RestController
-
+@RequestMapping("/order")
+@RequiredArgsConstructor
 public class OrderController {
 
     private final OrderService orderService;
-    
 
     @PostMapping
-    public ResponseEntity<OrderDto> createOrder(@RequestBody AddOrderRequestDto addOrderRequestDto) {
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(orderService.createOrder(addOrderRequestDto));
+    public ResponseEntity<OrderDto> createOrder(@RequestBody AddOrderRequestDto dto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(orderService.createOrder(dto));
     }
+
     @GetMapping
-    public ResponseEntity<List<OrderDto>> getAllOrders(){
+    public ResponseEntity<List<OrderDto>> getAllOrders() {
         return ResponseEntity.ok(orderService.getAllOrders());
     }
 
-     @PatchMapping("/{id}/status")
+    @PatchMapping("/{id}/status")
     public ResponseEntity<OrderDto> updateStatus(
-             @PathVariable Long id,
-             @RequestBody Map<String, String> request) {
-         String status = request.get("status");
-         return ResponseEntity.ok(orderService.updateOrderStatus(id, status));
-     }
+            @PathVariable Long id,
+            @RequestBody Map<String, String> request) {
 
-     @GetMapping("/{id}")
-     public ResponseEntity<OrderDto> getOrderById(@PathVariable Long id) {
-         return ResponseEntity.ok(orderService.getOrderById(id));
-     }
+        String status = request.get("status");
+        Long userId = Long.parseLong(request.get("userId"));
 
-     }
+        return ResponseEntity.ok(orderService.updateOrderStatus(id, status, userId));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<OrderDto> getOrderById(@PathVariable Long id) {
+        return ResponseEntity.ok(orderService.getOrderById(id));
+    }
+}

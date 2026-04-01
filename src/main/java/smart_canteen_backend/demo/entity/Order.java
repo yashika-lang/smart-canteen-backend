@@ -21,10 +21,16 @@ public class Order {
 
     private Integer quantity;
     private Integer totalPrice;
-    private String status;
 
    private Integer tokenNumber;
     private LocalDateTime createdAt;
+
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
+
+    @ManyToOne// ek user ke kaafi orders hosakte hai
+    @JoinColumn(name = "user_id") // db me column ban jaaye user_id ka
+    private User user;
 
 
 }

@@ -12,4 +12,5 @@ public class AddOrderRequestDto {
 
     private Long  menuItemId;
     private Integer quantity;
+    private Long userId;
 }
