@@ -17,4 +17,6 @@ public class AddMenuRequestDto {
     @NotBlank(message = "Enter the valid url")
     private String imageUrl;
     private boolean available;
+    private String category;
+    private String description;
 }

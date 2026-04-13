@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import smart_canteen_backend.demo.dto.AddOrderRequestDto;
+import smart_canteen_backend.demo.dto.CreateOrderRequest;
 import smart_canteen_backend.demo.dto.OrderDto;
 import smart_canteen_backend.demo.service.OrderService;
 
@@ -19,9 +20,10 @@ public class OrderController {
     private final OrderService orderService;
 
     @PostMapping
-    public ResponseEntity<OrderDto> createOrder(@RequestBody AddOrderRequestDto dto) {
+    public ResponseEntity<OrderDto> createOrder(@RequestBody CreateOrderRequest dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(orderService.createOrder(dto));
     }
+
 
     @GetMapping
     public ResponseEntity<List<OrderDto>> getAllOrders() {
@@ -43,4 +45,13 @@ public class OrderController {
     public ResponseEntity<OrderDto> getOrderById(@PathVariable Long id) {
         return ResponseEntity.ok(orderService.getOrderById(id));
     }
-}
+    @GetMapping("/admin/stats")
+    public ResponseEntity<Map<String, Object>> getStats() {
+        return ResponseEntity.ok(orderService.getAdminStats());
+    }
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<OrderDto>> getUserOrders(@PathVariable Long userId) {
+        return ResponseEntity.ok(orderService.getOrdersByUser(userId));
+    }
+    }
+

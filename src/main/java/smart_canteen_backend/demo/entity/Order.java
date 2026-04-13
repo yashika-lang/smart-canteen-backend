@@ -7,6 +7,7 @@ import lombok.Setter;
 
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -17,9 +18,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long id;
-    private Long menuItemId;
 
-    private Integer quantity;
     private Integer totalPrice;
 
    private Integer tokenNumber;
@@ -28,9 +27,10 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<OrderItem> items;
+
     @ManyToOne// ek user ke kaafi orders hosakte hai
     @JoinColumn(name = "user_id") // db me column ban jaaye user_id ka
     private User user;
-
-
 }

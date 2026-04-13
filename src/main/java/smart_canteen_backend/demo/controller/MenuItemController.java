@@ -55,6 +55,14 @@ public class MenuItemController {
     {
         return ResponseEntity.ok(menuItemService.updatePartialMenuItem(id,updates));
     }
+    @PutMapping("/{id}/availability")
+    public ResponseEntity<?> updateAvailability(
+            @PathVariable Long id,
+            @RequestParam boolean available
+    ) {
+        menuItemService.updateAvailability(id, available);
+        return ResponseEntity.ok("Updated");
+    }
 
 }
 

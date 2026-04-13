@@ -18,4 +18,6 @@ public interface MenuItemService {
     MenuDto updateMenuById(Long id, AddMenuRequestDto addMenuRequestDto);
 
     MenuDto updatePartialMenuItem(Long id, Map<String, Object> updates);
+
+    void updateAvailability(Long id, boolean available);
 }

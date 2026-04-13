@@ -58,6 +58,14 @@ public class MenuItemServiceImpl implements MenuItemService {
         return modelMapper.map(saved, MenuDto.class);
 
     }
+    @Override
+    public void updateAvailability(Long id, boolean available) {
+        MenuItem item = menuItemRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Item not found"));
+
+        item.setAvailable(available);
+        menuItemRepository.save(item);
+    }
 
     @Override     //PATCH
     public MenuDto updatePartialMenuItem(Long id, Map<String, Object> updates) {
@@ -75,6 +83,12 @@ public class MenuItemServiceImpl implements MenuItemService {
 
                 case "available":
                     menuItem.setAvailable((Boolean) value);
+                    break;
+                case "category":
+                    menuItem.setCategory((String) value);
+                    break;
+                case "description":
+                    menuItem.setDescription((String) value);
                     break;
 
                 default:

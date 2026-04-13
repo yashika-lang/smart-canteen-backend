@@ -14,5 +14,7 @@ public class MenuDto {
     private String name;
     private String imageUrl;
     private boolean available;
+    private String category;
+    private String description;
 
 }
